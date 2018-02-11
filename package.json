@@ -12,6 +12,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "geodist": "^0.2.1",
+    "images-scraper": "^2.0.11",
     "nearby-cities": "^1.1.0",
     "node-telegram-bot-api": "^0.30.0",
     "recastai": "^3.7.0",

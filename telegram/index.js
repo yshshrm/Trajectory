@@ -4,6 +4,8 @@ const config = require('./../config.js');
 const recastai = require('recastai');
 const nearbyCities = require("nearby-cities");
 const geodist = require('geodist');
+var Scraper = require ('images-scraper')
+, bing = new Scraper.Bing();
 
 const client = new recastai.request(config.RECASTAI_TOKEN, 'en');  
 const token = config.TELEGRAM_TOKEN;
@@ -62,9 +64,22 @@ bot.on('message', (msg) => {
 
 
                 for (let i = 0; i < sortedCities.length; i++) { 
+                    
                     console.log(sortedCities[i].name);
                     request('http://api.geonames.org/wikipediaSearchJSON?q='+ encodeURIComponent(sortedCities[i].name)  +'&maxRows=10&username=yash4688', function (error, response, body) {
-                        bot.sendMessage(msg.chat.id, sortedCities[i].name + '\n' + JSON.parse(body).geonames[0].summary);
+                        
+                    bing.list({
+                        keyword: sortedCities[i].name,
+                        num: 2,
+                        detail: true
+                        })
+                        .then(function (res) {
+                            bot.sendMessage(msg.chat.id,  "-------------------------\n" + sortedCities[i].name + '\n' + JSON.parse(body).geonames[0].summary)
+                            .then(() => bot.sendPhoto(msg.chat.id, res[0].url))
+                            .then(() => bot.sendPhoto(msg.chat.id, res[1].url))
+                        }).catch(function(err) {
+                            console.log('err',err);
+                        })
                     });
                     
                 }

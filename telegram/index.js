@@ -27,8 +27,6 @@ bot.on('message', (msg) => {
         if(res.intent()){
             if (res.intent().slug === 'greetings') {
                 bot.sendMessage(msg.chat.id, 'Greetings from Valhalla! Any specific budget?');
-                // const url = 'https://telegram.org/img/t_logo.png';
-                // bot.sendPhoto(msg.chat.id, url);
                     // , { reply_markup: { keyboard: [['hi'], ['Bulk option']] }}
                 // );    
             }

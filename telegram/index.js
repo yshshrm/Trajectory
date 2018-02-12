@@ -48,20 +48,20 @@ bot.on('message', (msg) => {
                     let sortedCities = cities.filter(city => city.population > 1000000 && city.country == 'IN' && geodist({lat: city.lat, lon: city.lon}, {lat: res.raw.entities.location[0].lat, lon: res.raw.entities.location[0].lng}, {exact: true, unit: 'km'}) < distance && geodist({lat: city.lat, lon: city.lon}, {lat: res.raw.entities.location[0].lat, lon: res.raw.entities.location[0].lng}, {exact: true, unit: 'km'}) > distance/2);
     
     
-                    for (let i = 0; i < sortedCities.length; i++) { 
+                    for (let i = 0; i < 1; i++) { 
                         
-                        console.log(sortedCities[i].name);
+                        console.log(sortedCities[0].name);
 
-                        request('http://api.geonames.org/wikipediaSearchJSON?q='+ encodeURIComponent(sortedCities[i].name)  +'&maxRows=10&username=yash4688', function (error, response, body) {     
+                        request('http://api.geonames.org/wikipediaSearchJSON?q='+ encodeURIComponent(sortedCities[0].name)  +'&maxRows=10&username=yash4688', function (error, response, body) {     
                             bing.list({
-                                keyword: sortedCities[i].name,
+                                keyword: sortedCities[0].name,
                                 num: 2,
                                 detail: true
                                 })
                                 .then(function (res) {
-                                     message = sortedCities[i].name + '\n' + JSON.parse(body).geonames[0].summary;
+                                     message = sortedCities[0].name + '\n' + JSON.parse(body).geonames[0].summary;
 
-                                    request('https://apis.mapmyindia.com/advancedmaps/v1/7ng3rpngqc8sg2oaa53p97wjvchk32g9/nearby_search?lat=' + sortedCities[i].lat + '&lng=' + sortedCities[i].lon + '&code=TRMOTH&page=1', function (error, response, body) {
+                                    request('https://apis.mapmyindia.com/advancedmaps/v1/7ng3rpngqc8sg2oaa53p97wjvchk32g9/nearby_search?lat=' + sortedCities[0].lat + '&lng=' + sortedCities[0].lon + '&code=TRMOTH&page=1', function (error, response, body) {
                                         // console.log(body);
                                          
                                          bot.sendMessage(msg.chat.id,  '\nPoints of Interests include  \n' + JSON.parse(body).results[0].poi + '\n' + JSON.parse(body).results[1].poi + '\n' + JSON.parse(body).results[2].poi);
@@ -74,10 +74,7 @@ bot.on('message', (msg) => {
                                 }).catch(function(err) {
                                     console.log('err',err);
                                 })
-                        });
-
-                        
-                        
+                        });   
                     }
 
                 }
@@ -105,7 +102,7 @@ bot.on('message', (msg) => {
                 let sortedCities = cities.filter(city => city.population > 1000000 && city.country == 'IN' && geodist({lat: city.lat, lon: city.lon}, {lat: res.raw.entities.location[0].lat, lon: res.raw.entities.location[0].lng}, {exact: true, unit: 'km'}) < distance && geodist({lat: city.lat, lon: city.lon}, {lat: res.raw.entities.location[0].lat, lon: res.raw.entities.location[0].lng}, {exact: true, unit: 'km'}) > distance/2);
 
 
-                for (let i = 0; i < sortedCities.length; i++) { 
+                for (let i = 0; i < 1; i++) { 
                     
                     console.log(sortedCities[i].name);
 
